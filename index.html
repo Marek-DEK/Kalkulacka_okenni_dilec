@@ -295,7 +295,7 @@
     </main>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxRILxrZ-0dp4l2XeUoYJTdBdknzCXNkTpwFQjgbTQGHAL5M57z9iDArYJvzqLKg6TD/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzkDQn1AsKm37f-7EUa99D5U8orjv7qo0DLsIGvrn7m-nr3-OUTp07L9h6K4MD3WR5t/exec';
         const elements = {
             email: document.getElementById('email'),
             error: document.getElementById('email-error'),
@@ -308,17 +308,13 @@
             successMessage: document.getElementById('success-message')
         };
 
-        let selected = {
-            vyrobce: null,
-            produkt: null,
-            velikost: null
-        };
+        let selected = { vyrobce: null, produkt: null, velikost: null };
 
         // Normalizace textu pro shodu
         const normalize = (text) => text.trim().toUpperCase().replace(/\s+/g, ' ');
 
         // Správa výběru
-        function handleSelection(type, value, container, nextGroup) {
+        function handleSelection(type, value, container, nextGroup, event) {
             selected[type] = value;
             container.querySelectorAll('.tile').forEach(tile => 
                 tile.classList.remove('selected')
@@ -363,8 +359,8 @@
                     const tile = document.createElement('div');
                     tile.className = 'tile';
                     tile.textContent = manufacturers[vyrobce].originalName;
-                    tile.onclick = () => {
-                        handleSelection('vyrobce', vyrobce, elements.vyrobceContainer, elements.produktGroup);
+                    tile.onclick = (event) => {
+                        handleSelection('vyrobce', vyrobce, elements.vyrobceContainer, elements.produktGroup, event);
                         elements.produktContainer.innerHTML = '';
                         Object.keys(manufacturers[vyrobce].products).sort().forEach(produkt => {
                             const productTile = document.createElement('div');
@@ -453,7 +449,12 @@
                 return;
             }
 
-            const formData = new URLSearchParams({
+            if (!selected.vyrobce || !selected.produkt || !selected.velikost) {
+                alert('Vyberte prosím výrobce, produkt a velikost.');
+                return;
+            }
+
+            const params = new URLSearchParams({
                 email: elements.email.value,
                 vyrobce: selected.vyrobce || '',
                 produkt: selected.produkt || '',
@@ -464,21 +465,23 @@
                 rozmer_vnitrni_d: document.getElementById('vnitrni-d').textContent
             });
 
-            await fetch(scriptURL, {
-                method: 'POST',
-                body: formData
-            });
-            
-            elements.successMessage.style.display = 'block';
-            setTimeout(() => {
-                elements.successMessage.style.display = 'none';
-                elements.email.value = '';
-                elements.vyrobceContainer.innerHTML = '';
-                elements.produktGroup.style.display = 'none';
-                elements.velikostGroup.style.display = 'none';
-                elements.rozmeryInfo.style.display = 'none';
-                loadData();
-            }, 2000);
+            try {
+                await fetch(`${scriptURL}?${params.toString()}`);
+                alert('Formulář byl úspěšně odeslán. Děkujeme!');
+                elements.successMessage.style.display = 'block';
+                setTimeout(() => {
+                    elements.successMessage.style.display = 'none';
+                    elements.email.value = '';
+                    elements.vyrobceContainer.innerHTML = '';
+                    elements.produktGroup.style.display = 'none';
+                    elements.velikostGroup.style.display = 'none';
+                    elements.rozmeryInfo.style.display = 'none';
+                    loadData();
+                }, 2000);
+            } catch (error) {
+                alert('Odeslání se nezdařilo. Zkuste to prosím znovu.');
+                showError('Odeslání se nezdařilo. Zkuste to prosím znovu.');
+            }
         }
 
         // Event listeners
