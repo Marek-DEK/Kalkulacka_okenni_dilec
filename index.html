@@ -366,9 +366,8 @@
                             const productTile = document.createElement('div');
                             productTile.className = 'tile';
                             productTile.textContent = produkt;
-                            productTile.onclick = () => {
-                                handleSelection('produkt', produkt, elements.produktContainer, elements.velikostGroup);
-                                // Změna: tabulka místo dlaždic
+                            productTile.onclick = (event) => {
+                                handleSelection('produkt', produkt, elements.produktContainer, elements.velikostGroup, event);
                                 renderVelikostTable(manufacturers[vyrobce].products[produkt]);
                             };
                             elements.produktContainer.appendChild(productTile);
