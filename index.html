@@ -263,7 +263,7 @@
             <div class="form-group">
                 <label>Firemní email *</label>
                 <input type="email" id="email" class="form-input" placeholder="vas@dek-cz.com" required>
-                <div id="email-error" class="error-message">Použijte prosím firemní e-mail ve tvaru @dek-cz.com</div>
+                <div id="email-error" class="error-message">Zadejte prosím platný firemní e-mail ve tvaru jmeno@dek-cz.com</div>
             </div>
 
             <div class="form-group">
@@ -295,7 +295,7 @@
     </main>
 
     <script>
-        const scriptURL = 'https://transcendent-puffpuff-5bc4a2.netlify.app/.netlify/functions/proxy';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxqYhufy-IFWfPy8KXvPvIvqFlDR4IielRjByM8AtMykUUAPGm8fmo6WttpLF-23Et3jw/exec';
         const elements = {
             email: document.getElementById('email'),
             error: document.getElementById('email-error'),
@@ -325,7 +325,8 @@
 
         // Validace emailu
         function validateEmail() {
-            const isValid = elements.email.value.endsWith('@dek-cz.com');
+            const email = elements.email.value.trim();
+            const isValid = /^[a-zA-Z0-9._%+-]+@dek-cz\.com$/.test(email);
             elements.email.style.borderColor = isValid ? '#ddd' : 'var(--error-color)';
             elements.error.style.display = isValid ? 'none' : 'block';
             return isValid;
