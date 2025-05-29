@@ -250,21 +250,32 @@
             }
         }
         @media (max-width: 700px) {
-            .form-container {
-                max-width: 100vw;
-                padding: 1rem 0.2rem;
+            .steps-menu {
+                display: none !important;
             }
         }
         @media (max-width: 480px) {
             .main-header {
-                padding: 0 1rem;
+                padding: 0 0.3rem;
+                height: 56px;
             }
-            .form-container {
-                padding: 1rem 0.2rem;
+            body {
+                padding-top: 56px;
+            }
+            .form-title {
+                font-size: 1rem;
             }
             .tile {
-                padding: 0.5rem;
                 font-size: 0.9rem;
+                padding: 0.3rem 0.4rem;
+            }
+            .form-group {
+                font-size: 0.93em;
+                padding: 0.5rem 0.2rem 0.4rem 0.5rem;
+            }
+            .steps-menu .step {
+                font-size: 0.97em;
+                padding: 0.5em 0.5em;
             }
         }
 
@@ -331,13 +342,18 @@
         }
 
         @media (max-width: 900px) {
-            main {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
             .steps-menu {
-                min-width: 0;
-                margin-bottom: 1.5rem;
+                display: none !important;
+            }
+            main {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+                padding: 0 !important;
+            }
+            .form-container {
+                max-width: 100vw !important;
+                padding: 0.5rem 0.2rem !important;
+                margin: 0 !important;
             }
         }
 
@@ -451,7 +467,7 @@
             </ul>
         </nav>
         <div class="form-container">
-            <h1 class="form-title">Výpočetní výstup TOPDEK</h1>
+            <h1 class="form-title">Kalkulačka okenního dílce TOPDEK</h1>
 
             <div class="form-group">
                 <span class="step-label">1</span>
@@ -465,7 +481,7 @@
 
             <div class="form-group">
                 <span class="step-label">2</span>
-                <label>Firemní email <span style="color:#e10000">*</span></label>
+                <label>Firemní mail <span style="color:#e10000">*</span></label>
                 <input type="email" id="email" class="form-input" placeholder="vas@dek-cz.com" required>
                 <div id="email-error" class="error-message">Zadejte prosím platný firemní e-mail ve tvaru jmeno@dek-cz.com</div>
             </div>
@@ -518,13 +534,13 @@
                     <div class="tile" id="kompletace-smontovany">
                         Smontovaný dílec, včetně EPS šablony
                         <div style="font-size:0.95em;color:#888;margin-top:0.2em;">
-                            <b>Dodání bude rychlejší.</b>
+                            <b>Dodání bude pomalejší.</b>
                         </div>
                     </div>
                     <div class="tile" id="kompletace-nesmontovany">
                         Nesmontovaný dílec, bez EPS šablony
                         <div style="font-size:0.95em;color:#888;margin-top:0.2em;">
-                            <b>Dodání bude pomalejší.</b>
+                            <b>Dodání bude rychlejší.</b>
                         </div>
                     </div>
                 </div>
@@ -547,8 +563,8 @@
                 <div id="sklon-typ" style="color:#e10000;font-size:1em;font-weight:bold;margin-top:0.4em;">
                     <!-- Dynamický text zde -->
                 </div>
-                <div style="color:#888;font-size:0.97em;margin-top:0.2em;">
-                    U atypického sklonu může dojít k prodloužení dodací lhůty.
+                <div id="sklon-pozn" style="color:#888;font-size:0.97em;margin-top:0.2em;">
+                    U atypického sklonu může dojít k zvýšení ceny dílce.
                 </div>
             </div>
 
@@ -1005,15 +1021,16 @@
         function updateSklonIkona() {
             const uhel = parseInt(sklonStrechyInput.value, 10) || 22;
             sklonValue.textContent = uhel + '°';
-            // Otočí čáru kolem levého konce (5,35), kladně nahoru
             sklonCaraRect.setAttribute('transform', `rotate(${-uhel} 5 35)`);
-            // Typ dílce podle úhlu
+            const sklonPozn = document.getElementById('sklon-pozn');
             if ((uhel >= 22 && uhel <= 30) || (uhel >= 60 && uhel <= 65)) {
                 sklonTyp.textContent = "Atypický TOPDEK okenní dílec";
                 sklonTyp.style.color = "#e10000";
+                if (sklonPozn) sklonPozn.style.display = "";
             } else {
                 sklonTyp.textContent = "Standardní TOPDEK okenní dílec";
                 sklonTyp.style.color = "#009900";
+                if (sklonPozn) sklonPozn.style.display = "none";
             }
         }
         if (sklonStrechyInput && sklonCaraRect) {
