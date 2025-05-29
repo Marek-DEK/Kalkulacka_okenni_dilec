@@ -855,7 +855,7 @@
             try {
                 const response = await fetch(`${scriptURL}?${params.toString()}`);
                 if (!response.ok) throw new Error('HTTP error');
-                alert('Formulář byl úspěšně odeslán. Děkujeme!');
+                alert('Formulář byl úspěšně odeslán. Děkujeme!\nVýsledek Vám přijde do 1 minuty na zadaný e-mail.');
                 elements.successMessage.style.display = 'block';
                 setTimeout(() => {
                     elements.successMessage.style.display = 'none';
