@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #e10000;
+            --primary-color: #E95E1D; /* změněno z #e10000 */
             --header-text-color: #ffffff;
             --dark-grey: #333;
             --text-color: #333;
@@ -156,7 +156,7 @@
 
         .tile.selected {
             border-color: var(--primary-color);
-            background-color: rgba(225, 0, 0, 0.05);
+            background-color: rgba(233, 94, 29, 0.05); /* upraveno podle nové barvy */
         }
 
         #rozmery-info {
@@ -201,7 +201,7 @@
         }
 
         .submit-btn:hover {
-            background-color: #c10000;
+            background-color: #c14a17; /* tmavší odstín nové barvy */
             transform: translateY(-1px);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -326,14 +326,14 @@
 
         .steps-menu .step.active,
         .steps-menu .step.completed {
-            background: #ffeaea;
-            color: #e10000;
+            background: #fff3eb; /* světlejší odstín nové barvy */
+            color: var(--primary-color);
             font-weight: 700;
         }
 
         .steps-menu .step.active span,
         .steps-menu .step.completed span {
-            background: #e10000;
+            background: var(--primary-color);
             color: #fff;
         }
 
@@ -379,7 +379,7 @@
             justify-content: center;
         }
         .stepper-btn:hover {
-            background: #c10000;
+            background: #c14a17;
         }
         .stepper-input {
             text-align: center;
@@ -393,7 +393,7 @@
             display: flex;
             align-items: center;
             gap: 0.7em;
-            color: #e10000;
+            color: var(--primary-color);
             font-weight: 600;
             font-size: 1.1em;
             padding: 1em 0;
@@ -403,7 +403,7 @@
             display: inline-block;
             width: 1.2em;
             height: 1.2em;
-            border: 3px solid #e10000;
+            border: 3px solid var(--primary-color);
             border-top: 3px solid #fff;
             border-radius: 50%;
             animation: spinner-rotate 0.8s linear infinite;
@@ -441,15 +441,6 @@
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="logo">
-            <a href="#">ATELIER DEK</a>
-        </div>
-        <nav class="main-nav">
-            <a href="#" class="nav-button">Kalkulačka</a>
-        </nav>
-    </header>
-
     <main style="display: flex; gap: 2rem;">
         <nav id="steps-menu" class="steps-menu">
             <ul>
@@ -521,7 +512,7 @@
                 <label>Počet oken tohoto typu:</label>
                 <div class="number-stepper">
                     <button type="button" id="minus-btn" class="stepper-btn">−</button>
-                    <input type="number" id="pocet-oken" class="form-input stepper-input" min="1" value="1" placeholder="Zadejte počet oken">
+                    <input type="number" id="pocet-oken" class="form-input stepper-input" min="1" value="" placeholder="Zadejte počet oken">
                     <button type="button" id="plus-btn" class="stepper-btn">+</button>
                 </div>
             </div>
@@ -557,8 +548,8 @@
                             <rect x="5" y="33.5" width="30" height="3" rx="1.5" fill="#e10000" id="sklon-cara-rect" />
                         </svg>
                     </div>
-                    <input type="range" id="sklon-strechy" min="22" max="65" value="30" step="1" class="sklon-slider">
-                    <span id="sklon-value" class="sklon-value">30°</span>
+                    <input type="range" id="sklon-strechy" min="22" max="65" value="" step="1" class="sklon-slider">
+                    <span id="sklon-value" class="sklon-value"></span> <!-- zde bylo "30°", nyní prázdné -->
                 </div>
                 <div id="sklon-typ" style="color:#e10000;font-size:1em;font-weight:bold;margin-top:0.4em;">
                     <!-- Dynamický text zde -->
@@ -571,13 +562,13 @@
             <!-- KROK 9: Tloušťka tepelněizolační vrstvy + AKUSTIK -->
             <div class="form-group" id="tloustka-group" style="display:none;">
                 <span class="step-label">9</span>
-                <label for="tloustka-izolace">Tloušťka tepelněizolační vrstvy (0–1000 mm):</label>
-                <input type="number" id="tloustka-izolace" class="form-input" min="0" max="1000" step="1" value="200" placeholder="Zadejte tloušťku v mm">
+                <label for="tloustka-izolace">Tloušťka tepelněizolační vrstvy (0–300 mm):</label>
+                <input type="number" id="tloustka-izolace" class="form-input" min="0" max="300" step="1" value="" placeholder="Zadejte tloušťku v mm">
                 <div id="tloustka-value" style="color:#444;font-size:1em;margin-top:0.3em;">
-                    Aktuální hodnota: <span id="tloustka-mm">200</span> mm
+                    Aktuální hodnota: <span id="tloustka-mm"></span> mm
                 </div>
                 <div id="tloustka-error" class="error-message" style="display:none;">
-                    Zadejte celé číslo v rozmezí 0 až 1000 mm.
+                    Zadejte celé číslo v rozmezí 0 až 300 mm.
                 </div>
 
                 <!-- AKUSTIK volba -->
@@ -592,7 +583,7 @@
                 <!-- Tloušťka OSB pole (zobrazí se jen při Ano) -->
                 <div id="osb-group" style="display:none; margin-top:1em;">
                     <label for="osb-tloustka">Tloušťka OSB nad tepelněizolační vrstvou (0–100 mm):</label>
-                    <input type="number" id="osb-tloustka" class="form-input" min="0" max="100" step="1" value="0" placeholder="Zadejte tloušťku v mm">
+                    <input type="number" id="osb-tloustka" class="form-input" min="0" max="100" step="1" value="" placeholder="Zadejte tloušťku v mm">
                     <div id="osb-error" class="error-message" style="display:none;">
                         Zadejte celé číslo v rozmezí 0 až 100 mm.
                     </div>
@@ -617,15 +608,15 @@
             <div class="form-group" id="lata-group" style="display:none;">
                 <span class="step-label">11</span>
                 <label for="lata-vyska">Výška profilu střešních latí nebo tloušťka bednění (20–200 mm):</label>
-                <input type="number" id="lata-vyska" class="form-input" min="20" max="200" step="1" value="40" placeholder="Zadejte výšku v mm">
+                <input type="number" id="lata-vyska" class="form-input" min="20" max="200" step="1" value="" placeholder="Zadejte výšku v mm">
                 <div id="lata-value" style="color:#444;font-size:1em;margin-top:0.3em;">
-                    Aktuální hodnota: <span id="lata-mm">40</span> mm
+                    Aktuální hodnota: <span id="lata-mm"></span> mm
                 </div>
                 <div id="lata-error" class="error-message" style="display:none;">
                     Zadejte celé číslo v rozmezí 20 až 200 mm.
                 </div>
                 <label for="kontralata-vyska" style="margin-top:1em;">Výška kontralatě (20–200 mm):</label>
-                <input type="number" id="kontralata-vyska" class="form-input" min="20" max="200" step="1" value="40" placeholder="Zadejte výšku kontralatě v mm">
+                <input type="number" id="kontralata-vyska" class="form-input" min="20" max="200" step="1" value="" placeholder="Zadejte výšku v mm">
                 <div id="kontralata-error" class="error-message" style="display:none;">
                     Zadejte celé číslo v rozmezí 20 až 200 mm.
                 </div>
@@ -883,7 +874,7 @@
                 elements.pocetOken.value && parseInt(elements.pocetOken.value) > 0, // 6: počet oken
                 !!selected.kompletace, // 7: kompletace
                 elements.sklonStrechy && elements.sklonStrechy.value !== '', // 8: sklon
-                elements.tloustkaIzolace && /^\d+$/.test(elements.tloustkaIzolace.value) && elements.tloustkaIzolace.value >= 0 && elements.tloustkaIzolace.value <= 1000 && (selected.akustik !== "ano" || (elements.osbTloustka && /^\d+$/.test(elements.osbTloustka.value) && elements.osbTloustka.value >= 0 && elements.osbTloustka.value <= 100)), // 9: tloušťka + OSB
+                elements.tloustkaIzolace && /^\d+$/.test(elements.tloustkaIzolace.value) && elements.tloustkaIzolace.value >= 0 && elements.tloustkaIzolace.value <= 300 && (selected.akustik !== "ano" || (elements.osbTloustka && /^\d+$/.test(elements.osbTloustka.value) && elements.osbTloustka.value >= 0 && elements.osbTloustka.value <= 100)), // 9: tloušťka + OSB
                 (selected.dhv === "0" || selected.dhv === "1" || selected.dhv === "2"), // 10: DHV
                 elements.lataVyska && /^\d+$/.test(elements.lataVyska.value) && elements.lataVyska.value >= 20 && elements.lataVyska.value <= 200 // 11: latě
             ];
@@ -962,7 +953,7 @@
                     pocetOken.dispatchEvent(new Event('input'));
                 };
                 plusBtn.onclick = function() {
-                    let val = parseInt(pocetOken.value) || 1;
+                    let val = parseInt(pocetOken.value) || 0;
                     pocetOken.value = val + 1;
                     pocetOken.dispatchEvent(new Event('input'));
                 };
@@ -1004,39 +995,50 @@
         elements.kompletaceNesmontovany.addEventListener('click', showSklonGroupIfReady);
 
         elements.sklonStrechy.addEventListener('input', function() {
-            const val = parseInt(this.value, 10);
-            elements.sklonValue.textContent = val + '°';
+            const val = this.value;
+            elements.sklonValue.textContent = val ? (val + '°') : '';
             updateStepsMenu();
         });
-        selected.sklon = 30; // výchozí hodnota
-        elements.sklonStrechy.addEventListener('input', function() {
-            selected.sklon = parseInt(this.value, 10);
-        });
 
-        const sklonCaraRect = document.getElementById('sklon-cara-rect');
-        const sklonStrechyInput = document.getElementById('sklon-strechy');
-        const sklonValue = document.getElementById('sklon-value');
-        const sklonTyp = document.getElementById('sklon-typ');
-
+        // a také uprav funkci updateSklonIkona:
         function updateSklonIkona() {
-            const uhel = parseInt(sklonStrechyInput.value, 10) || 22;
-            sklonValue.textContent = uhel + '°';
-            sklonCaraRect.setAttribute('transform', `rotate(${-uhel} 5 35)`);
+            const uhel = elements.sklonStrechy.value;
+            elements.sklonValue.textContent = uhel ? (uhel + '°') : '';
+            const sklonCaraRect = document.getElementById('sklon-cara-rect');
+            const sklonTyp = elements.sklonTyp;
             const sklonPozn = document.getElementById('sklon-pozn');
-            if ((uhel >= 22 && uhel <= 30) || (uhel >= 60 && uhel <= 65)) {
-                sklonTyp.textContent = "Atypický TOPDEK okenní dílec";
-                sklonTyp.style.color = "#e10000";
-                if (sklonPozn) sklonPozn.style.display = "";
+            if (uhel) {
+                // Animace naklonění
+                if (sklonCaraRect) sklonCaraRect.setAttribute('transform', `rotate(${-uhel} 5 35)`);
+                // Info o typu sklonu
+                if ((uhel >= 22 && uhel <= 30) || (uhel >= 60 && uhel <= 65)) {
+                    sklonTyp.textContent = "Atypický TOPDEK okenní dílec";
+                    sklonTyp.style.color = "#E95E1D";
+                    if (sklonPozn) sklonPozn.style.display = "";
+                } else {
+                    sklonTyp.textContent = "Standardní TOPDEK okenní dílec";
+                    sklonTyp.style.color = "#009900";
+                    if (sklonPozn) sklonPozn.style.display = "none";
+                }
             } else {
-                sklonTyp.textContent = "Standardní TOPDEK okenní dílec";
-                sklonTyp.style.color = "#009900";
+                // Výchozí stav – žádná animace, žádný text
+                if (sklonCaraRect) sklonCaraRect.removeAttribute('transform');
+                if (sklonTyp) sklonTyp.textContent = '';
                 if (sklonPozn) sklonPozn.style.display = "none";
+                elements.sklonValue.textContent = '';
             }
         }
-        if (sklonStrechyInput && sklonCaraRect) {
-            sklonStrechyInput.addEventListener('input', updateSklonIkona);
+
+        // Správné napojení na input:
+        elements.sklonStrechy.addEventListener('input', function() {
             updateSklonIkona();
-        }
+            updateStepsMenu();
+        });
+
+        // Při načtení stránky nastav výchozí stav:
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSklonIkona();
+        });
 
         // Zobrazit krok 9 po výběru sklonu
         elements.sklonStrechy.addEventListener('input', function() {
@@ -1050,9 +1052,8 @@
         // Validace a zobrazení hodnoty
         elements.tloustkaIzolace.addEventListener('input', function() {
             let val = elements.tloustkaIzolace.value;
-            if (val === "") val = 0;
-            elements.tloustkaMm.textContent = val;
-            if (!/^\d+$/.test(val) || val < 0 || val > 1000) {
+            elements.tloustkaMm.textContent = val ? val : '';
+            if (!/^\d+$/.test(val) || val < 0 || val > 300) {
                 elements.tloustkaError.style.display = 'block';
             } else {
                 elements.tloustkaError.style.display = 'none';
@@ -1102,7 +1103,7 @@
         // Pro zobrazení/skrytí polí používej pouze jednoduché validace (např. showDhvGroupIfReady);
 
         function showDhvGroupIfReady() {
-            const tloustkaValid = elements.tloustkaIzolace && /^\d+$/.test(elements.tloustkaIzolace.value) && elements.tloustkaIzolace.value >= 0 && elements.tloustkaIzolace.value <= 1000;
+            const tloustkaValid = elements.tloustkaIzolace && /^\d+$/.test(elements.tloustkaIzolace.value) && elements.tloustkaIzolace.value >= 0 && elements.tloustkaIzolace.value <= 300;
             let osbValid = true;
             if (elements.akustikAno && elements.akustikAno.checked) {
                 osbValid = elements.osbTloustka && /^\d+$/.test(elements.osbTloustka.value) && elements.osbTloustka.value >= 0 && elements.osbTloustka.value <= 100;
@@ -1145,13 +1146,13 @@
         // Validace a zobrazení hodnoty
         elements.lataVyska.addEventListener('input', function() {
             let val = elements.lataVyska.value;
-            elements.lataMm.textContent = val;
+            elements.lataMm.textContent = val ? val : '';
             if (!/^\d+$/.test(val) || val < 20 || val > 200) {
                 elements.lataError.style.display = 'block';
             } else {
                 elements.lataError.style.display = 'none';
             }
-            selected.lata = parseInt(val, 10) || 40;
+            selected.lata = parseInt(val, 10) || '';
             updateStepsMenu();
         });
 
@@ -1170,10 +1171,13 @@
             // Textová pole
             elements.akce.value = '';
             elements.email.value = '';
-            if (elements.pocetOken) elements.pocetOken.value = 1;
-            if (elements.tloustkaIzolace) elements.tloustkaIzolace.value = 200;
-            if (elements.lataVyska) elements.lataVyska.value = 40;
-            if (elements.osbTloustka) elements.osbTloustka.value = 0;
+            if (elements.pocetOken) elements.pocetOken.value = '';
+            if (elements.tloustkaIzolace) elements.tloustkaIzolace.value = '';
+            if (elements.lataVyska) elements.lataVyska.value = '';
+            if (elements.osbTloustka) elements.osbTloustka.value = '';
+            if (elements.kontralataVyska) elements.kontralataVyska.value = '';
+            if (elements.tloustkaMm) elements.tloustkaMm.textContent = '';
+            if (elements.lataMm) elements.lataMm.textContent = '';
 
             // Výběry a skryté skupiny
             selected = { vyrobce: null, produkt: null, velikost: null, kompletace: null, sklon: 30, tloustka: 200, dhv: null, lata: 40 };
@@ -1205,8 +1209,8 @@
             if (document.getElementById('vnitrni-s')) document.getElementById('vnitrni-s').textContent = '';
             if (document.getElementById('vnitrni-d')) document.getElementById('vnitrni-d').textContent = '';
             // Reset sklonu
-            if (elements.sklonStrechy) elements.sklonStrechy.value = 30;
-            if (elements.sklonValue) elements.sklonValue.textContent = '30°';
+            if (elements.sklonStrechy) elements.sklonStrechy.value = '';
+            if (elements.sklonValue) elements.sklonValue.textContent = '';
             if (elements.sklonTyp) elements.sklonTyp.textContent = '';
             updateStepsMenu();
         }
