@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOPDEK - Kalkulačka okenního dílce | Úvod</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(120deg, #f5f5f5 0%, #fff3eb 100%);
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .landing-hero-pro {
+            min-height: 100vh;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(120deg, #fff3eb 60%, #f5f5f5 100%);
+            box-sizing: border-box;
+            padding-bottom: 80px; /* space for footer */
+        }
+        .landing-hero-pro-content.center-box {
+            margin: 0 auto;
+            align-items: flex-start;
+            justify-content: center;
+            left: 0; right: 0;
+        }
+        .landing-hero-pro-content {
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+            padding: 2.2rem 2.2rem 1.7rem 2.2rem;
+            border-left: 6px solid #E95E1D;
+            border-right: 6px solid #E95E1D;
+            background: #fff;
+            box-shadow: 0 8px 32px rgba(233,94,29,0.10), 0 0 0 1px #e7e7e7;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .landing-hero-pro-logo {
+            font-weight: 900;
+            color: #E95E1D;
+            letter-spacing: 0.09em;
+            font-size: 1.15em;
+            margin-top: 1.2em;
+            margin-bottom: 0.7em;
+        }
+        .landing-hero-pro-title {
+            font-size: 2em;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 0.01em;
+            text-align: left;
+        }
+        .landing-hero-pro-title span {
+            color: #E95E1D;
+            font-weight: 900;
+        }
+        .landing-hero-pro-desc {
+            color: #222;
+            font-size: 1.13em;
+            margin-bottom: 2.1em;
+            line-height: 1.7;
+            max-width: 520px;
+        }
+        .landing-hero-pro-highlight {
+            display: block;
+            color: #E95E1D;
+            font-weight: 700;
+            margin: 1.1em 0 1.2em 0;
+            font-size: 1.08em;
+            text-align: left;
+        }
+        .landing-hero-pro-list {
+            margin: 0 0 1.5em 1.2em;
+            padding: 0;
+            color: #444;
+            font-size: 1em;
+        }
+        .landing-hero-pro-list.square-list {
+            list-style-type: square;
+        }
+        .landing-hero-pro-list li {
+            margin-bottom: 0.5em;
+        }
+        .landing-hero-pro-btn {
+            display: inline-block;
+            background: #E95E1D;
+            color: #fff;
+            border: none;
+            border-radius: 0;
+            padding: 1.1em 2.7em;
+            font-size: 1.18em;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: none;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 3px solid #c14a17;
+            transition: background 0.18s, border-bottom 0.18s, transform 0.13s;
+            margin-top: 2.2em;
+        }
+        .landing-hero-pro-btn:hover {
+            background: #c14a17;
+            border-bottom: 3px solid #E95E1D;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .landing-footer-pro {
+            margin-top: 0;
+            text-align: center;
+            color: #888;
+            font-size: 1.05em;
+            padding: 1.7em 0 1.3em 0;
+            border-top: 1px solid #e7e7e7;
+            background: #fff3eb;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 10;
+        }
+        .landing-footer-pro span {
+            color: #E95E1D;
+            font-weight: 700;
+        }
+        .landing-footer-pro a {
+            color: #E95E1D;
+            text-decoration: underline;
+        }
+        @media (max-width: 900px) {
+            .landing-hero-pro-content {
+                max-width: 98vw;
+                padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+            }
+            .landing-hero-pro-title {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-hero-pro">
+        <div class="landing-hero-pro-content center-box">
+            <div class="landing-hero-pro-logo">ATELIER DEK</div>
+            <div class="landing-hero-pro-title">Kalkulačka okenních dílců <span>TOPDEK</span></div>
+            <div class="landing-hero-pro-desc">
+                <span class="landing-hero-pro-highlight">Zadávejte poptávky, generujte výstupy a zrychlete komunikaci mezi projekcí, obchodem a výrobou.</span>
+                <ul class="landing-hero-pro-list square-list">
+                    <li>Rychlé zadání parametrů a okamžitý výpočet</li>
+                    <li>Automatické vygenerování podkladů do e-mailu</li>
+                    <li>Do e-mailu obdržíte i podrobný postup, jak s podklady dále pracovat</li>
+                    <li>Moderní UX, validace a kontrola vstupů</li>
+                    <li>Propojení s interními procesy a reportingem</li>
+                </ul>
+            </div>
+            <a href="index.html" class="landing-hero-pro-btn">Spustit kalkulátor</a>
+        </div>
+    </div>
+    <footer class="landing-footer-pro">
+        &copy; 2025 <span>ATELIER DEK</span> &ndash; Interní aplikace pro zaměstnance skupiny DEK | Kontakt: <a href="mailto:marek.havlata@dek-cz.com">marek.havlata@dek-cz.com</a>
+    </footer>
+</body>
+</html>
